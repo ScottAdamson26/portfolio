@@ -15,8 +15,9 @@ module.exports = {
 
     colors:{
       customBlue: '#3d55d9',
-      offWhite: '#FFFCF4',
+      offWhite: '#FFF6ED',
       darkGrey: '#636059',
+      beige: '#D6D2C1',
       
     }},
   },

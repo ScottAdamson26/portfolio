@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const NavBar = ({ active, setActive }) => {
-  const [hasScrolled, setHasScrolled] = useState(false); // State to track if the page has been scrolled
+const NavBar = ({ active, setActive, homeRef, workRef, enquireRef }) => {
+  const [hasScrolled, setHasScrolled] = useState(false);
 
-  // Track scroll position to toggle background color
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -13,63 +12,51 @@ const NavBar = ({ active, setActive }) => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-    // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  // Update navigation click to scroll instead of changing state
   const handleNavClick = (navItem) => {
-    setActive(navItem); // Set the active section
+    setActive(navItem);
+    if (navItem === "Home") {
+      homeRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (navItem === "Work") {
+      workRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (navItem === "Enquire") {
+      enquireRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 w-full font-rubik rounded-full px-6 py-6 max-w-screen-xl mx-auto mt-2 ${
-        hasScrolled ? ' bg-offWhite shadow-lg' : ''
-      }`}
-    >
-      <ul className="flex justify-between items-center space-x-4">
-        <li className="nav-item">
-          <a
-            onClick={() => handleNavClick('Home')}
-            className={`${
-              active === 'Home'
-                ? 'border-2 border-customBlue text-customBlue'
-                : 'border-2 border-offWhite text-gray-700'
-            } px-4 py-2 rounded-full hover:border-customBlue transition-all duration-700 ease-in-out cursor-pointer`}
-          >
-            Home
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            onClick={() => handleNavClick('Work')}
-            className={`${
-              active === 'Work'
-                ? 'border-2 border-customBlue text-customBlue'
-                : 'border-2 border-offWhite text-darkGrey'
-            } px-4 py-2 rounded-full hover:border-customBlue transition-all duration-700 ease-in-out cursor-pointer`}
-          >
-            Work
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            onClick={() => handleNavClick('Enquire')}
-            className={`${
-              active === 'Enquire'
-                ? 'border-2 border-customBlue text-customBlue'
-                : 'border-2 border-offWhite text-darkGrey'
-            } px-4 py-2 rounded-full hover:border-customBlue transition-all duration-700 ease-in-out cursor-pointer`}
-          >
-            Enquire
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <div className="fixed top-0 left-0 right-0 z-50 h-full max-w-screen-xl w-full mx-auto p-4">
+      <nav
+        className={` font-rubik rounded-full px-6 py-3 w-full mt-2 ${
+          hasScrolled ? "bg-offWhite shadow-lg" : ""
+        }`}
+      >
+        <ul className="flex justify-between items-center">
+          {["Home", "Work", "Enquire"].map((item) => (
+            <li key={item} className="nav-item">
+              <button
+                onClick={() => handleNavClick(item)}
+                className={`${
+                  active === item
+                    ? "border-customBlue text-customBlue shadow-md"
+                    : "border-transparent text-darkGrey"
+                } px-4 py-[5px] border-2 rounded-full hover:border-customBlue hover:shadow-md transition-all duration-500 ease-in-out cursor-pointer box-border`}
+                style={{ minWidth: "80px", textAlign: "center" }}
+              >
+                {item}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 };
 

@@ -2,3 +2,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 16px; /* Makes the scrollbar thin */
+}
+
+::-webkit-scrollbar-track {
+  background: #fffcf4; /* Scrollbar track (background) */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c4b596; /* Scrollbar itself */
+  border-radius: 10px; /* Makes it rounded */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* Makes the scrollbar thin */
+  scrollbar-color: #c4b596 #fffcf4; /* Scrollbar and track colors */
+}
+.grayscale-hover {
+  transition: filter 0.5s ease-in-out;
+}
+
+.grayscale-hover:hover {
+  filter: grayscale(1);
+}
