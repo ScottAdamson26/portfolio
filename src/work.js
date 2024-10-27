@@ -1,6 +1,4 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import medicineImage from "./med1.png";
 import antigamba from "./medicine.png";
 import potpundit from "./potpundit.png";

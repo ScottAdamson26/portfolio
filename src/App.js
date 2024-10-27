@@ -5,7 +5,6 @@ import Work from "./work";
 import Enquire from "./Enquire";
 import Popup from "./Popup";
 import "./index.css";
-import Footer from "./Footer";
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
